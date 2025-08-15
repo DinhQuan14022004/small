@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Creative Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Animation */
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            top: 80%;
+            left: 20%;
+            animation-delay: -10s;
+        }
+
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            left: 70%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(0px) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-top: 2rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Interactive Button */
+        .cta-section {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Feature Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4ecdc4;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="loader" id="loader"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">CREATIVE UI</h1>
+            <p class="subtitle">Khám phá trải nghiệm giao diện hiện đại và sáng tạo</p>
+        </header>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3 class="card-title">Thiết kế Sáng tạo</h3>
+                <p class="card-description">Giao diện được thiết kế với phong cách hiện đại, sử dụng các hiệu ứng thị
+                    giác và màu sắc gradient đẹp mắt.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3 class="card-title">Hiệu suất Cao</h3>
+                <p class="card-description">Tối ưu hóa cho tốc độ tải nhanh và trải nghiệm mượt mà trên mọi thiết bị từ
+                    desktop đến mobile.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h3 class="card-title">Responsive Design</h3>
+                <p class="card-description">Thiết kế linh hoạt thích ứng hoàn hảo với mọi kích thước màn hình và thiết
+                    bị khác nhau.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <button class="cta-button" onclick="showLoader()">Khám phá ngay</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Dự án hoàn thành</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">95%</span>
+                <span class="stat-label">Khách hàng hài lòng</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Hỗ trợ kỹ thuật</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">5⭐</span>
+                <span class="stat-label">Đánh giá trung bình</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Loading animation
+        function showLoader() {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '1';
+            loader.style.visibility = 'visible';
+
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+                alert('Cảm ơn bạn đã khám phá giao diện! 🎉');
+            }, 2000);
+        }
+
+        // Add entrance animations
+        window.addEventListener('load', () => {
+            const cards = document.querySelectorAll('.card');
+            const stats = document.querySelectorAll('.stat-item');
+
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(50px)';
+                    card.style.transition = 'all 0.6s ease';
+
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+
+            setTimeout(() => {
+                stats.forEach((stat, index) => {
+                    setTimeout(() => {
+                        stat.style.opacity = '0';
+                        stat.style.transform = 'scale(0.8)';
+                        stat.style.transition = 'all 0.5s ease';
+
+                        setTimeout(() => {
+                            stat.style.opacity = '1';
+                            stat.style.transform = 'scale(1)';
+                        }, 50);
+                    }, index * 100);
+                });
+            }, 1000);
+        });
+
+        // Mouse parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.5;
+                const xPos = (x - 0.5) * speed * 50;
+                const yPos = (y - 0.5) * speed * 50;
+
+                shape.style.transform += ` translate(${xPos}px, ${yPos}px)`;
+            });
+        });
+    </script>
+</body>
+
+</html>
